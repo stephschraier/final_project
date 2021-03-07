@@ -5,6 +5,3 @@
 // Back to home page button, log out button (can we redirect this back to the home page or do we need a 2nd button)
 // Database write back: Reservation ID and within that "UserID, UserName, Name, Start Date, End Date, EquipmentID, Equipment Name, GymID, Gym Name"
 
-window.addEventListener('DOMContentLoaded', async function(event) {
-
-    let db = firebase.firestore()
