@@ -5,3 +5,24 @@
 // Back to home page button, log out button (can we redirect this back to the home page or do we need a 2nd button)
 // Database write back: Reservation ID and within that "UserID, UserName, Name, Start Date, End Date, EquipmentID, Equipment Name, GymID, Gym Name"
 
+let db = firebase.firestore()
+
+window.addEventListener('DOMContentLoaded', async function(event) {
+
+    document.querySelector('form').addEventListener('submit', async function(event) {
+    event.preventDefault()
+    
+    let renterName = document.querySelector('#name').value
+    let resStartDate = document.querySelector('#reservationstart').value
+    let resEndDate = document.querySelector('#reservationend').value
+
+    if (renterName.length && resStartDate.length && resEndDate.length > 0) {
+        let docRef = await db.collection('Reservations').add({
+          renterName: renterName,
+          resStartDate: resStartDate,
+          resEndDate: resEndDate
+        })
+      }
+
+    })
+})
