@@ -6,7 +6,7 @@ let db = firebase.firestore()
 
 window.addEventListener('DOMContentLoaded', async function(event) {
 
-    document.querySelector('form').addEventListener('submit', async function(event) {
+  document.querySelector('form').addEventListener('submit', async function(event) {
     event.preventDefault()
     
     let renterName = document.querySelector('#name').value
@@ -14,13 +14,15 @@ window.addEventListener('DOMContentLoaded', async function(event) {
     let resEndDate = document.querySelector('#reservationend').value
 
     if (renterName.length && resStartDate.length && resEndDate.length > 0) {
-        let docRef = await db.collection('Reservations').add({
-          renterName: renterName,
-          resStartDate: resStartDate,
-          resEndDate: resEndDate
-        })
-      }
-      //changes
+      
+      let docRef = await db.collection('Reservations').add({
+        renterName: renterName,
+        resStartDate: resStartDate,
+        resEndDate: resEndDate
+      })
 
-    })
+    }
+
+  })
+  
 })
