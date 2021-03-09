@@ -5,6 +5,9 @@
 // Back to home page button, log out button (can we redirect this back to the home page or do we need a 2nd button)
 // Database write back: Reservation ID and within that "UserID, UserName, Name, Start Date, End Date, EquipmentID, Equipment Name, GymID, Gym Name"
 
+//QUESTIONS: need the code to clear the form, is this going to work with us having the form on each piece of equipment, how do we get equipment ID and gym ID
+//Are we overcomplicated this trying to collect the dates? Should we just structure this with a reserved button (similar to movies) and collect who reserved the equipment? - in this case, how do we get equip and gym ID applies (who will come from sign in)
+
 let db = firebase.firestore()
 
 window.addEventListener('DOMContentLoaded', async function(event) {
