@@ -18,9 +18,11 @@ window.addEventListener('DOMContentLoaded', async function(event) {
    
    for (let i=0; i < equipmentAvailable.length; i++){
        let equipmentAvailableID = equipmentAvailable[i].id 
-       let equipment = equipmentAvailable[i].equipment
-       let equipmentURL = equipmentAvailable[i].ImageURL
+       let equipment = equipmentAvailableID.Equipment
+       let equipmentURL = equipmentAvailableID.ImageURL
+       console.log(equipmentAvailableID)
        console.log(equipment)
+       console.log(equipmentURL)
 
 
    }
