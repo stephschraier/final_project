@@ -26,23 +26,25 @@ window.addEventListener('DOMContentLoaded', async function(event) {
        console.log(equipmentURL)
    
 
-   //insert the html in the correct spot for the images - how do i put this into the right columns
+   //insert the html in the correct spot for the images
    document.querySelector('.column1').insertAdjacentHTML ('beforeend',`
-        <p class="text-center text-sm mt-2">${equipmentName}</p>
-            <p><img class="m-auto border border-gray-300" src="${equipmentURL}"></p>
-                <div class="button text-center">
-                    <form id="rented">
-                        <button class="rental bg-blue-800 hover:bg-blue-600 text-white px-4 py-2 rounded-xl">Reserve This</button>
-                    </form>
-                </div>
+        <div>
+            <div class="text-center text-sm mt-2">${equipmentName}</div>
+            <div><img class="m-auto border border-gray-300" src="${equipmentURL}"></div>
+            <div class="button-${equipmentAvailableID} text-center">
+                <form id="rented">
+                    <button class="rental bg-blue-800 hover:bg-blue-600 text-white px-4 py-2 rounded-xl">Reserve This</button>
+                </form>
+            </div>
+        </div>
    `)
-  //when reserve me button is clicked send the ID back to firebase into the reservations collection - only 1st button becoming opaque, all data sending
+  //when reserve me button is clicked send the ID back to firebase into the reservations collection 
 //---
-    let equipmentRented = document.querySelector(`button`)
+    let equipmentRented = document.querySelector(`.button-${equipmentAvailableID}`)
     equipmentRented.addEventListener('click', async function(event) {
       event.preventDefault()
-      document.querySelector(`button`).classList.add('opacity-20')
-      await db.collection('reservations2').add({
+      document.querySelector(`.button-${equipmentAvailableID}`).classList.add('opacity-20')
+      await db.collection('reservations3').add({
         //UserID:
         //UserName:
         EquipmentID: equipmentAvailableID,
