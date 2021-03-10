@@ -4,19 +4,7 @@
 
 let db = firebase.firestore()
 
-// firebase.auth().onAuthStateChanged(async function(user) {
-  window.addEventListener('DOMContentLoaded', async function(event) {
-
-// if (user) {
-
-//   console.log('signed in')
-
-//   // Ensure the signed-in user is in the users collection
-//   db.collection('users').doc(user.uid).set({
-//       name: user.displayName,
-//       email: user.email
-//   })
-
+window.addEventListener('DOMContentLoaded', async function(event) {
 
   // Sign-out button
   document.querySelector('#sign-in-or-sign-out').innerHTML = `
@@ -26,9 +14,9 @@ let db = firebase.firestore()
 
   `
   document.querySelector('.sign-out').addEventListener('click', function(event) {
-      console.log('sign out clicked')
-      firebase.auth().signOut()
-      document.location.href = 'index.html'
+    console.log('sign out clicked')
+    firebase.auth().signOut()
+    document.location.href = 'index.html'
   })
 
 
@@ -43,6 +31,18 @@ let db = firebase.firestore()
     let reservationURL = reservationData.ImageURL
     let reservationEquipment = reservationData.EquipmentName
     console.log (reservationEquipment)
+
+    document.querySelector('.column1').insertAdjacentHTML ('beforeend',`
+    <div>
+        <div class="text-center text-sm mt-2">${equipmentName}</div>
+        <div><img class="m-auto border border-gray-300" src="${equipmentURL}"></div>
+        <div class="button-${equipmentAvailableID} text-center">
+            <form id="rented">
+                <button class="rental bg-blue-800 hover:bg-blue-600 text-white px-4 py-2 rounded-xl">Reserve This</button>
+            </form>
+        </div>
+    </div>
+    `)
   
   }
 
