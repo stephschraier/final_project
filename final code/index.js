@@ -8,24 +8,24 @@
 // // firebase.auth().onAuthStateChanged and move code that
 // // shows login UI to only show when signed out
 
-// firebase.auth().onAuthStateChanged(async function(user) {
-//   if (user) {
-//     // Signed in
-//     console.log('signed in')
-//     // Ensure the signed-in user is in the users collection
-//     db.collection('users').doc(user.uid).set({
-//       name: user.displayName,
-//       email: user.email
-//     })
-//     // Sign-out button
-//     document.querySelector('.sign-in-or-sign-out').innerHTML = `
-//       <button class="text-pink-500 underline sign-out">Sign Out</button>
-//     `
-//     document.querySelector('.sign-out').addEventListener('click', function(event) {
-//       console.log('sign out clicked')
-//       firebase.auth().signOut()
-//       document.location.href = 'kelloggram.html'
-//     })
+firebase.auth().onAuthStateChanged(async function(user) {
+  if (user) {
+    // Signed in
+    console.log('signed in')
+    // Ensure the signed-in user is in the users collection
+    db.collection('Users').doc(user.uid).set({
+      name: user.displayName,
+      email: user.email
+    })
+    // Sign-out button
+    document.querySelector('.sign-in-or-sign-out').innerHTML = `
+      <button class="bg-blue-800 hover:bg-blue-600 text-white px-4 py-2 rounded-xl underline sign-out">Sign Out</button>
+    `
+    document.querySelector('.sign-out').addEventListener('click', function(event) {
+      console.log('sign out clicked')
+      firebase.auth().signOut()
+      document.location.href = 'index.html'
+    })
 //     // Listen for the form submit and create/render the new post
 //     document.querySelector('form').addEventListener('submit', async function(event) {
 //       event.preventDefault()
