@@ -5,27 +5,58 @@
 // Back to home page button, log out button (can we redirect this back to the home page or do we need a 2nd button)
 // Database write back: Reservation ID and within that "UserID, UserName, Name, Start Date, End Date, EquipmentID, Equipment Name, GymID, Gym Name"
 
-//QUESTIONS: need the code to clear the form, is this going to work with us having the form on each piece of equipment, how do we get equipment ID and gym ID
-//Are we overcomplicated this trying to collect the dates? Should we just structure this with a reserved button (similar to movies) and collect who reserved the equipment? - in this case, how do we get equip and gym ID applies (who will come from sign in)
+//QUESTIONS: loop is not working, not pulling in the right data though pulls in the array properly
 
-let db = firebase.firestore()
+
 
 window.addEventListener('DOMContentLoaded', async function(event) {
+    let db = firebase.firestore()
 
-    document.querySelector('form').addEventListener('submit', async function(event) {
-    event.preventDefault()
+   let querySnapshot = await db.collection('equipment').get()
+   let equipmentAvailable = querySnapshot.docs
+   console.log (equipmentAvailable)
+   
+   for (let i=0; i < equipmentAvailable.length; i++){
+       let equipmentAvailableID = equipmentAvailable[i].id 
+       let equipment = equipmentAvailable[i].equipment
+       let equipmentURL = equipmentAvailable[i].ImageURL
+       console.log(equipment)
+
+
+   }
+
+   document.querySelector('gym1equip').insertAdjacentHTML ('beforeend',`
+        <p class="text-center mt-2">${equipment}</p>
+            <p><img class="m-auto border border-gray-300" src="${equipmentURL}"></p>
+                <div class="text-center">
+                    <form>
+                        <button class="bg-blue-800 hover:bg-blue-600 text-white px-4 py-2 rounded-xl">Reserve This</button>
+                    </form>
+                </div>
+   `)
+   
+   let equipmentRented = document.querySelector(`.gym1equip-${equipmentAvaialbleID}`)
+   movieLink.addEventListener('click', async function(event) {
+       event.preventDefault()
+       document.querySelector(`.gym1equip-${equipmentAvailableID}`).classList.add('opacity-20')
+       await db.collection('reservations').doc(`${equipmentAvailableID}`).set({})
+   }
+   )
+   
+    // document.querySelector('form').addEventListener('submit', async function(event) {
+    // event.preventDefault()
     
-    let renterName = document.querySelector('#name').value
-    let resStartDate = document.querySelector('#reservationstart').value
-    let resEndDate = document.querySelector('#reservationend').value
+    // let renterName = document.querySelector('#name').value
+    // let resStartDate = document.querySelector('#reservationstart').value
+    // let resEndDate = document.querySelector('#reservationend').value
 
-    if (renterName.length && resStartDate.length && resEndDate.length > 0) {
-        let docRef = await db.collection('Reservations').add({
-          renterName: renterName,
-          resStartDate: resStartDate,
-          resEndDate: resEndDate
-        })
-      }
+    // if (renterName.length && resStartDate.length && resEndDate.length > 0) {
+    //     let docRef = await db.collection('Reservations').add({
+    //       renterName: renterName,
+    //       resStartDate: resStartDate,
+    //       resEndDate: resEndDate
+    //     })
+    //   }
 
-    })
+    // })
 })
