@@ -3,7 +3,7 @@
 // When reserve me button is clicked - item becomes greyed out
 // Go to my profile link to get to user profile page
 // Back to home page button, log out button (can we redirect this back to the home page or do we need a 2nd button)
-// Database write back: Reservation ID and within that "UserID, UserName, Name, Start Date, End Date, EquipmentID, Equipment Name, GymID, Gym Name"
+// Database write back: Reservation ID and within that "UserID, Name, EquipmentID, Equipment Name, GymID, Gym Name, ImageURL"
 
 //QUESTIONS: loop is not working, not pulling in the right data though pulls in the array properly
 
@@ -24,30 +24,43 @@ window.addEventListener('DOMContentLoaded', async function(event) {
        console.log(equipmentAvailableID)
        console.log(equipmentName)
        console.log(equipmentURL)
-    
-
-
-   }
+   
 
    //insert the html in the correct spot for the images - how do i put this into the right columns
    document.querySelector('.column1').insertAdjacentHTML ('beforeend',`
-        <p class="text-center mt-2">${equipment}</p>
+        <p class="text-center text-sm mt-2">${equipmentName}</p>
             <p><img class="m-auto border border-gray-300" src="${equipmentURL}"></p>
-                <div class="text-center">
+                <div class="button text-center">
                     <form id="rented">
-                        <button class="bg-blue-800 hover:bg-blue-600 text-white px-4 py-2 rounded-xl">Reserve This</button>
+                        <button class="rental bg-blue-800 hover:bg-blue-600 text-white px-4 py-2 rounded-xl">Reserve This</button>
                     </form>
                 </div>
    `)
+  //when reserve me button is clicked send the ID back to firebase into the reservations collection - only 1st button becoming opaque, all data sending
+//---
+    let equipmentRented = document.querySelector(`button`)
+    equipmentRented.addEventListener('click', async function(event) {
+      event.preventDefault()
+      document.querySelector(`button`).classList.add('opacity-20')
+      await db.collection('reservations2').add({
+        //UserID:
+        //UserName:
+        EquipmentID: equipmentAvailableID,
+        EquipmentName: equipmentName,
+        ImageURL: equipmentURL
+        //GymID:
+        //GymName:
+
+      })
+      
+ }
+ )
+ //---
+}
    
-   //when reserve me button is clicked send the ID back to firebase into the reservations collection
-   let equipmentRented = document.querySelector(`.rented-${equipmentAvaialbleID}`)
-   equipmentRented.addEventListener('click', async function(event) {
-       event.preventDefault()
-       document.querySelector(`.gym1equip-${equipmentAvailableID}`).classList.add('opacity-20')
-       await db.collection('reservations').doc(`${equipmentAvailableID}`).set({})
-   }
-   )
+ 
+
+    
    
    //old from when we used a form not a button
     // document.querySelector('form').addEventListener('submit', async function(event) {
