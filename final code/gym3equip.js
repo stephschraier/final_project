@@ -13,26 +13,26 @@
 window.addEventListener('DOMContentLoaded', async function(event) {
     let db = firebase.firestore()
 
-   let querySnapshot = await db.collection('Equipment2').get()
-   let equipmentAvailable2 = querySnapshot.docs
-   console.log (equipmentAvailable2)
+   let querySnapshot = await db.collection('Equipment3').get()
+   let equipmentAvailable3 = querySnapshot.docs
+   console.log (equipmentAvailable3)
    
    for (let i=0; i < equipmentAvailable.length; i++){
-       let equipmentAvailableID2 = equipmentAvailable2[i].id 
-       let equipment2 = equipmentAvailable2[i].data()
-       let equipmentName2 = equipment2.Equipment
-       let equipmentURL2 = equipment2.ImageURL
-       let gymName2 = equipment2.GymName
-       let price2 = equipment2.Price
-       console.log(equipmentAvailableID)
-       console.log(equipmentName)
-       console.log(equipmentURL)
-       console.log(gymName)
-       console.log(price)
+       let equipmentAvailableID3 = equipmentAvailable3[i].id 
+       let equipment3 = equipmentAvailable3[i].data()
+       let equipmentName3 = equipment3.Equipment
+       let equipmentURL3 = equipment3.ImageURL
+       let gymName3 = equipment3.GymName
+       let price3 = equipment3.Price
+       console.log(equipmentAvailableID3)
+       console.log(equipmentName3)
+       console.log(equipmentURL3)
+       console.log(gymName3)
+       console.log(price3)
    
 
    //insert the html in the correct spot for the images
-   document.querySelector('.column2').insertAdjacentHTML ('beforeend',`
+   document.querySelector('.column3').insertAdjacentHTML ('beforeend',`
         <div>
             <div class="text-center text-sm mt-2">${equipmentName}</div>
             <div><img class="m-auto border border-gray-300" src="${equipmentURL}"></div>
