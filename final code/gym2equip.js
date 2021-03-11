@@ -13,7 +13,7 @@
 window.addEventListener('DOMContentLoaded', async function(event) {
     let db = firebase.firestore()
 
-   let querySnapshot = await db.collection('Equipment').get()
+   let querySnapshot = await db.collection('Equipment2').get()
    let equipmentAvailable = querySnapshot.docs
    console.log (equipmentAvailable)
    
@@ -24,11 +24,11 @@ window.addEventListener('DOMContentLoaded', async function(event) {
        let equipmentURL = equipment.ImageURL
        let gymName = equipment.GymName
        let price = equipment.Price
-       console.log(equipmentAvailableID)
-       console.log(equipmentName)
-       console.log(equipmentURL)
-       console.log(gymName)
-       console.log(price)
+    //    console.log(equipmentAvailableID)
+    //    console.log(equipmentName)
+    //    console.log(equipmentURL)
+    //    console.log(gymName)
+    //    console.log(price)
    
 
    //insert the html in the correct spot for the images

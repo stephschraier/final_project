@@ -23,7 +23,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
     document.querySelector('.homepage').insertAdjacentHTML('beforeend', `
             <div class="lg:flex m-auto">
                 
-            <div class="lg:flex-col m-4 w-1/4 bg-gray-200">
+            <div class="lg:flex-col m-4 w-1/3 bg-gray-200">
                 <p>
                     <h3 class="text-center text-xl font-bold text-gray-700 uppercase">Gym #1</h3>
                 </p>
@@ -31,12 +31,12 @@ firebase.auth().onAuthStateChanged(async function(user) {
                 <p><img class="m-auto border border-gray-300" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAeFBMVEUAAAD////19fWvr6/Ly8thYWFOTk6CgoLT09Ph4eHW1taLi4v5+fnIyMicnJwxMTG4uLjAwMArKyvp6emUlJQ8PDwmJiYZGRl3d3doaGipqanj4+NaWloUFBSFhYXv7+9tbW0LCwtISEg3Nzd5eXlTU1MuLi5DQ0PTsZi7AAAEHklEQVR4nO3Ya3fiKhSA4cRajSbe6m20tt7b//8PRzYkhg3RzrFn1pqu9/lUAiXsADvEJAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMBf0cnaV1kn0mKRZ9s0nQ5+RepOl/9+qkr5pbTWTeaXi9leXTQtx1VpdSkNIr0/j3tpWvSHn7piPzGD3ZXFtSkNIx3YXtK657DBuigrW+9B5fBy+bUqPV1Kfd2kY/5VXzQt0+phvF8KRdD3plcN603X7eTyyBa65u8iaPPFCJev9ergQZsIe/81wnSVXIfYinXtnMJhSwf2zi9NcxONcKVqFy2vOhj/YxEWtUnQEa6vNzXLea1HJhMsG0TmoHGNugjzrvU+ivWT9oa703pa3e3bIiwXeCTCk30E4+5uNrls4k1avPgNRrJ5dkkyjj35IMJFQ2Uu93EpZiaF83dG6B5YGOFe1s6kTFD7bbhDfskj2NsdubwXoZ660tZ0Mi9L0lnmNXg0wlSSVxjhsFqDQuZJ53npo1/ENpfn1hw+V2Oo3chbLY9EuJUQD0kswmlaz9HJwQ/YqZJgUBNGMcst9Tow46hn8UVtzT4e4UAmahuN0NR0a+WBdx9n7gIMKnxeLlUvpbbZC/UL5rF7r/RHIsySzFS1IxFu9GLJY52U6agpizhehCqh9VOVPDO9JB6LcCkLdRZGaLJIUc8eq2iEMtU386hxaw4zPYe9751DW5eeTzrClU4Op2iEmR317GaANsL2wJr4dWO3TyqmbV6/EEbo59rkdoR29RW5jlA2fD1BmpFMdSfVqeesa8IIG14ncuDbXMvyRpzXW5ixXU+EZlUHB7ubESaT+AYp7AYtvbX0filHLi+LrT7Yh+0a3ofL1Ht0cox49Vp81lfJIbpkbkeYTKMRyrvumrUnek4NCe5ksmz4WOskwo+GSnu+dRuiI+cMdQqWXGFPvTZvHP8wwkU0wqOZmWptyHtYvxNkE47dCPKkmUTY+RhZOvHaL6d1Z/GykdsE95GFnD4dFseZPWgFN7gToUv5Oo2vZXctTx+L+cxO88ZvMCvX11lqD3cirOjTwSb16fNvlc/K+nBH34vQneD0t0XPfC1Mrj2r1W+z8KcX65ciDL7QV171NliD5eeHE3yNfyFCSVDh92Fiv4wd/XUkC8atTXnIzVvxToTJsX+tjfcyqOp780j1/QjfiniE86rjrc4yXn6xCaCr/z0eYewMu3IhvMbGL13YBr3Ip3ji9om+aDb1dUs/x5pcHq77Ju0Hv57IwmxV7wgbQ+w3pq9yT2GwMtkt+u4ZnZvCf9DnObIx/gcb92NG0Wrd/lL5dy3bbhm377f9V23uZKyf4JiPf+oSBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAICf4zfONSdqoTvCvAAAAABJRU5ErkJggg=="></p>
                     <div class="text-center">
                         <form id="rented">
-                        <a href="gym1equip copy.html" class="bg-blue-800 hover:bg-blue-600 text-white px-2 py-1 rounded-xl">See Available Equipment</a>
+                        <a href="gym1equip.html" class="bg-blue-800 hover:bg-blue-600 text-white px-2 py-1 rounded-xl">See Available Equipment</a>
                         </form>
                     </div>
             </div> 
 
-            <div class="lg:flex-col m-4 w-1/4 bg-gray-200">
+            <div class="lg:flex-col m-4 w-1/3 bg-gray-200">
                 <p>
                     <h3 class="text-center text-xl font-bold text-gray-700 uppercase">Gym #2</h3>
                 </p>
@@ -49,7 +49,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
                 </div>
             </div> 
 
-            <div class="lg:flex-col m-4 w-1/4 bg-gray-200">
+            <div class="lg:flex-col m-4 w-1/3 bg-gray-200">
                 <p>
                     <h3 class="text-center text-xl font-bold text-gray-700 uppercase">Gym #3</h3>
                 </p>
