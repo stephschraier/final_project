@@ -52,7 +52,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
                 <p class="text-center mt-3">Located in Lincoln Park</p>
                 <p><img class="m-auto border border-gray-300" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtGyXzg2xtMDRbNRLCpkpK17O1iMUfLiE3ZQ&usqp=CAU"></p>
                 <div class="text-center mt-6">
-                    <a href="gymp3equip.html" class="bg-blue-800 hover:bg-blue-600 text-white px-2 py-1 rounded-xl">See Available Equipment</a>
+                    <a href="gym3equip.html" class="bg-blue-800 hover:bg-blue-600 text-white px-2 py-1 rounded-xl">See Available Equipment</a>
                 </div>
             </div> 
             </div> 
