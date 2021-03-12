@@ -7,20 +7,20 @@ let db = firebase.firestore()
 window.addEventListener('DOMContentLoaded', async function(event) {
 
   // Sign-out button
-  document.querySelector('#sign-in-or-sign-out').innerHTML = `
+  // document.querySelector('#sign-in-or-sign-out').innerHTML = `
 
-      <h1 class="bg-gray-200 text-3xl font-bold text-blue-800 text-center uppercase">Username's Reservations</h1>
-      <button class="text-3xl font-bold text-blue-800 text-center uppercase sign-out">Sign Out</button>
+  //     <h1 class="bg-gray-200 text-3xl font-bold text-blue-800 text-center uppercase">Username's Reservations</h1>
+  //     <button class="text-3xl font-bold text-blue-800 text-center uppercase sign-out">Sign Out</button>
 
-  `
-  document.querySelector('.sign-out').addEventListener('click', function(event) {
-    console.log('sign out clicked')
-    firebase.auth().signOut()
-    document.location.href = 'index.html'
-  })
+  // `
+  // document.querySelector('.sign-out').addEventListener('click', function(event) {
+  //   console.log('sign out clicked')
+  //   firebase.auth().signOut()
+  //   document.location.href = 'index.html'
+  // })
 
 
-  let querySnapshot = await db.collection('reservations').get()
+  let querySnapshot = await db.collection('reservations3').get()
   let docRef = querySnapshot.docs
   // console.log (docRef)
    
@@ -30,39 +30,31 @@ window.addEventListener('DOMContentLoaded', async function(event) {
     let reservationData = docRef[i].data()
     let reservationURL = reservationData.ImageURL
     let reservationEquipment = reservationData.EquipmentName
+    let gymName = reservationData.GymName
+    let price = reservationData.Price
     console.log (reservationEquipment)
 
-    document.querySelector('.column1').insertAdjacentHTML ('beforeend',`
-    <div>
-        <div class="text-center text-sm mt-2">${equipmentName}</div>
-        <div><img class="m-auto border border-gray-300" src="${equipmentURL}"></div>
-        <div class="button-${equipmentAvailableID} text-center">
-            <form id="rented">
-                <button class="rental bg-blue-800 hover:bg-blue-600 text-white px-4 py-2 rounded-xl">Reserve This</button>
-            </form>
+      document.querySelector('.column1').insertAdjacentHTML ('beforeend',`
+        <div class="lg:flex-col m-4 bg-gray-200">
+          <p class="text-center mt-2">${reservationEquipment}</p>
+          <p><img class="m-auto md:object-scale-down border border-gray-300" src="${reservationURL}"></p>
+          <p>
+            <ul class="w-full text-center">
+              <ul class="mx-auto my-1 p-1 w-72 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">Gym Name: ${gymName}</ul>
+              <ul class="mx-auto my-1 p-1 w-72 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">Price: ${price}</ul>
+              <ul class="mx-auto my-1 p-1 w-72 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">Reservation Start Date: 0/0/0000</ul>
+              <ul class="mx-auto my-1 p-1 w-72 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">Reservation End Date: 0/0/0000</ul>
+            </ul>
+          </p>
         </div>
-    </div>
-    `)
-  
+    
+      `)
+
   }
 
 })
   //   //insert the html in the correct spot for the images - how do i put this into the right columns
-  //   document.querySelector('.column1').insertAdjacentHTML ('beforeend',`
-  //     <div class="lg:flex-col m-4 w-1/4 bg-gray-200">
-  //       <p class="text-center mt-2">Treadmill</p>
-  //       <p><img class="m-auto border border-gray-300" src="https://cdn.webshopapp.com/shops/281654/files/282878529/treadmill-fitrun-40i.jpg"></p>
-  //       <p>
-  //         <ul class="w-full text-center">
-  //           <ul class="mx-auto my-1 p-1 w-72 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">Equipment 1</ul>
-  //           <ul class="mx-auto my-1 p-1 w-72 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">Price: $0.00</ul>
-  //           <ul class="mx-auto my-1 p-1 w-72 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">Reservation Start Date: 0/0/0000</ul>
-  //           <ul class="mx-auto my-1 p-1 w-72 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">Reservation End Date: 0/0/0000</ul>
-  //         </ul>
-  //       </p>
-  //     </div>
-  
-  //   `)
+
   
 
  
