@@ -2,7 +2,6 @@
 // Back to home page button, log out button (can we redirect this back to the home page or do we need a 2nd button)
 // Pulling from database: based on userID need to pull ReservationID which has all items listed above
 
-
 firebase.auth().onAuthStateChanged(async function(user) {
 
   if (user) {
