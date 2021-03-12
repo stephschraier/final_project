@@ -5,7 +5,7 @@
 // Back to home page button, log out button (can we redirect this back to the home page or do we need a 2nd button)
 // Database write back: Reservation ID and within that "UserID, Name, EquipmentID, Equipment Name, GymID, Gym Name, ImageURL"
 
-//TODO: Add in sign out button, add in link to reservations page, confirm grey out is persistent, create shell for 2 and 3 w/ 1 piece
+//TODO: Add in sign out button, add in link to reservations page, confirm grey out is persistent
 // Add data Scott needs - fix user name and email
 
 
@@ -24,12 +24,13 @@ window.addEventListener('DOMContentLoaded', async function(event) {
        let equipmentURL = equipment.ImageURL
        let gymName = equipment.GymName
        let price = equipment.Price
-       console.log(equipmentAvailableID)
-       console.log(equipmentName)
-       console.log(equipmentURL)
-       console.log(gymName)
-       console.log(price)
-   
+       //this is the section to persist opacity, needs sign in code to work
+        let docRef = await db.collection('reservations').doc(`${equipmentAvailableID}`).get()
+        let reservedEquip = docRef.data()
+        let opacityClass = ''
+        if (reservedEquip) {
+        opacityClass = 'opacity-20'}
+        
 
    //insert the html in the correct spot for the images
    document.querySelector('.column1').insertAdjacentHTML ('beforeend',`
