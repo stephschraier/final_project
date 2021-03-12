@@ -1,17 +1,15 @@
 
 <!DOCTYPE html>
 
-<head>
-    <title>Username's Reservations</title>
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" type="text/css">
-</head>
+    <head>
+        <title class ="Page-Title"></title>
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" type="text/css">
+    </head>
 
-<body>
-    <div id = "sign-in-or-sign-out">
-    </div>
+    <body>
     
-       <div class = "bg-gray-200">
-            <h1 class="text-3xl font-bold text-blue-800 text-center uppercase">Username's Reservations</h1>
+        <div class = "bg-gray-200">
+            <h1 class = "sign-in-or-sign-out"></h1>
             <div class="m-auto">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 column1">
                     <!-- <div class="column1 text-center text-xl font-bold text-gray-700 uppercase">Cardio Equipment</div> -->
@@ -23,29 +21,34 @@
             </div>
         </div>
 
-    <!--  Put the Firebase config here -->
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#available-libraries -->
-        <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-firestore.js"></script>
+        <!-- Put the Firebase config here -->
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
     
-    <script>
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-auth.js"></script>
+    
+        <!-- FirebaseUI Auth -->
+        <!-- https://firebaseopensource.com/projects/firebase/firebaseui-web/ -->
+        <script src="https://www.gstatic.com/firebasejs/ui/4.7.3/firebase-ui-auth.js"></script>
+    
+        <script>
         // Your web app's Firebase configuration
-    var firebaseConfig = {
-        apiKey: "AIzaSyBV4ENyf8O8prGCmXSBWg7DUnvuHnQAnfU",
-        authDomain: "smc-final-project.firebaseapp.com",
-        projectId: "smc-final-project",
-        storageBucket: "smc-final-project.appspot.com",
-        messagingSenderId: "660955503732",
-        appId: "1:660955503732:web:7c0a578732def634df8521"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    </script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBV4ENyf8O8prGCmXSBWg7DUnvuHnQAnfU",
+            authDomain: "smc-final-project.firebaseapp.com",
+            projectId: "smc-final-project",
+            storageBucket: "smc-final-project.appspot.com",
+            messagingSenderId: "660955503732",
+            appId: "1:660955503732:web:7c0a578732def634df8521"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        </script>
 
-    <script src="userres.js"></script>
+        <script src="userres.js"></script>
 
     </body>
 </html>
