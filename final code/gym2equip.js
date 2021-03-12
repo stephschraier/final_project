@@ -17,26 +17,26 @@ window.addEventListener('DOMContentLoaded', async function(event) {
    let equipmentAvailable2 = querySnapshot.docs
    console.log (equipmentAvailable2)
    
-   for (let i=0; i < equipmentAvailable.length; i++){
+   for (let i=0; i < equipmentAvailable2.length; i++){
        let equipmentAvailableID2 = equipmentAvailable2[i].id 
        let equipment2 = equipmentAvailable2[i].data()
        let equipmentName2 = equipment2.Equipment
        let equipmentURL2 = equipment2.ImageURL
        let gymName2 = equipment2.GymName
        let price2 = equipment2.Price
-       console.log(equipmentAvailableID)
-       console.log(equipmentName)
-       console.log(equipmentURL)
-       console.log(gymName)
-       console.log(price)
+       console.log(equipmentAvailableID2)
+       console.log(equipmentName2)
+       console.log(equipmentURL2)
+       console.log(gymName2)
+       console.log(price2)
    
 
    //insert the html in the correct spot for the images
-   document.querySelector('.column2').insertAdjacentHTML ('beforeend',`
+   document.querySelector('.gym2').insertAdjacentHTML ('beforeend',`
         <div>
-            <div class="text-center text-sm mt-2">${equipmentName}</div>
-            <div><img class="m-auto border border-gray-300" src="${equipmentURL}"></div>
-            <div class="button-${equipmentAvailableID} text-center">
+            <div class="text-center text-sm mt-2">${equipmentName2}</div>
+            <div><img class="m-auto border border-gray-300" src="${equipmentURL2}"></div>
+            <div class="button-${equipmentAvailableID2} text-center">
                 <form id="rented">
                     <button class="rental bg-blue-800 hover:bg-blue-600 text-white px-4 py-2 rounded-xl">Reserve This</button>
                 </form>
@@ -45,18 +45,18 @@ window.addEventListener('DOMContentLoaded', async function(event) {
    `)
   //when reserve me button is clicked send the ID back to firebase into the reservations collection - update to correct res collection
 //---
-    let equipmentRented = document.querySelector(`.button-${equipmentAvailableID}`)
+    let equipmentRented = document.querySelector(`.button-${equipmentAvailableID2}`)
     equipmentRented.addEventListener('click', async function(event) {
       event.preventDefault()
-      document.querySelector(`.button-${equipmentAvailableID}`).classList.add('opacity-20')
+      document.querySelector(`.button-${equipmentAvailableID2}`).classList.add('opacity-20')
       await db.collection('reservations3').add({
         // Name: user.displayName,
         // Email: user.email,
-        EquipmentID: equipmentAvailableID,
-        EquipmentName: equipmentName,
-        ImageURL: equipmentURL,
-        Price: price,
-        GymName: gymName
+        EquipmentID: equipmentAvailableID2,
+        EquipmentName: equipmentName2,
+        ImageURL: equipmentURL2,
+        Price: price2,
+        GymName: gymName2
         
       })
       

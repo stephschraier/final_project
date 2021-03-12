@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', async function(event) {
    let equipmentAvailable3 = querySnapshot.docs
    console.log (equipmentAvailable3)
    
-   for (let i=0; i < equipmentAvailable.length; i++){
+   for (let i=0; i < equipmentAvailable3.length; i++){
        let equipmentAvailableID3 = equipmentAvailable3[i].id 
        let equipment3 = equipmentAvailable3[i].data()
        let equipmentName3 = equipment3.Equipment
@@ -34,9 +34,9 @@ window.addEventListener('DOMContentLoaded', async function(event) {
    //insert the html in the correct spot for the images
    document.querySelector('.column3').insertAdjacentHTML ('beforeend',`
         <div>
-            <div class="text-center text-sm mt-2">${equipmentName}</div>
-            <div><img class="m-auto border border-gray-300" src="${equipmentURL}"></div>
-            <div class="button-${equipmentAvailableID} text-center">
+            <div class="text-center text-sm mt-2">${equipmentName3}</div>
+            <div><img class="m-auto border border-gray-300" src="${equipmentURL3}"></div>
+            <div class="button-${equipmentAvailableID3} text-center">
                 <form id="rented">
                     <button class="rental bg-blue-800 hover:bg-blue-600 text-white px-4 py-2 rounded-xl">Reserve This</button>
                 </form>
@@ -45,18 +45,18 @@ window.addEventListener('DOMContentLoaded', async function(event) {
    `)
   //when reserve me button is clicked send the ID back to firebase into the reservations collection - update to correct res collection
 //---
-    let equipmentRented = document.querySelector(`.button-${equipmentAvailableID}`)
+    let equipmentRented = document.querySelector(`.button-${equipmentAvailableID3}`)
     equipmentRented.addEventListener('click', async function(event) {
       event.preventDefault()
-      document.querySelector(`.button-${equipmentAvailableID}`).classList.add('opacity-20')
+      document.querySelector(`.button-${equipmentAvailableID3}`).classList.add('opacity-20')
       await db.collection('reservations3').add({
         // Name: user.displayName,
         // Email: user.email,
-        EquipmentID: equipmentAvailableID,
-        EquipmentName: equipmentName,
-        ImageURL: equipmentURL,
-        Price: price,
-        GymName: gymName
+        EquipmentID: equipmentAvailableID3,
+        EquipmentName: equipmentName3,
+        ImageURL: equipmentURL3,
+        Price: price3,
+        GymName: gymName3
         
       })
       
