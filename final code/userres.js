@@ -47,8 +47,6 @@ firebase.auth().onAuthStateChanged(async function(user) {
             <ul class="w-full text-center">
               <ul class="mx-auto my-1 p-1 w-72 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">Gym Name: ${gymName}</ul>
               <ul class="mx-auto my-1 p-1 w-72 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">Price: ${price}</ul>
-              <ul class="mx-auto my-1 p-1 w-72 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">Reservation Start Date: 0/0/0000</ul>
-              <ul class="mx-auto my-1 p-1 w-72 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">Reservation End Date: 0/0/0000</ul>
             </ul>
           </p>
         </div>
