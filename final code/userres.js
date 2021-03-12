@@ -32,7 +32,6 @@ window.addEventListener('DOMContentLoaded', async function(event) {
     let reservationEquipment = reservationData.EquipmentName
     let gymName = reservationData.GymName
     let price = reservationData.Price
-    console.log (reservationEquipment)
 
       document.querySelector('.column1').insertAdjacentHTML ('beforeend',`
         <div class="lg:flex-col m-4 bg-gray-200">
