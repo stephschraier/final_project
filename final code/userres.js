@@ -26,8 +26,14 @@ firebase.auth().onAuthStateChanged(async function(user) {
     </div>
     `
 
-    let querySnapshot = await db.collection('reservations3').get()
-    let docRef = querySnapshot.docs
+    document.querySelector('.sign-out').addEventListener('click', async function(event) {
+      console.log('sign out clicked')
+      firebase.auth().signOut()
+      document.location.href = 'index.html'
+    })
+
+    let querySnapshot = await db.collection('reservations3').get() 
+    let docRef = querySnapshot.docs 
     
     for (let i=0; i < docRef.length; i++){
         
@@ -37,32 +43,33 @@ firebase.auth().onAuthStateChanged(async function(user) {
       let reservationEquipment = reservationData.EquipmentName
       let gymName = reservationData.GymName
       let price = reservationData.Price
+      let reservationUser = reservationData.UserID
 
-      document.querySelector('.column1').insertAdjacentHTML ('beforeend',`
+      if (user.uid == reservationUser) {
 
-        <div class="lg:flex-col m-4 bg-gray-200 mx-auto">
-          <p class="text-center mt-2">${reservationEquipment}</p>
-          <p><img class="md:object-scale-down border border-gray-300" src="${reservationURL}"></p>
-          <p>
-            <ul class="w-full text-center">
-              <ul class="mx-auto my-1 p-1 w-72 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">Gym Name: ${gymName}</ul>
-              <ul class="mx-auto my-1 p-1 w-72 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">Price: ${price}</ul>
-            </ul>
-          </p>
-        </div>
-    
-      `)
+        document.querySelector('.column1').insertAdjacentHTML ('beforeend',`
 
+          <div class="lg:flex-col m-4 bg-gray-200 mx-auto">
+            <p class="text-center mt-2">${reservationEquipment}</p>
+            <p><img class="md:object-scale-down border border-gray-300" src="${reservationURL}"></p>
+            <p>
+              <ul class="w-full text-center">
+                <ul class="mx-auto my-1 p-1 w-72 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">Gym Name: ${gymName}</ul>
+                <ul class="mx-auto my-1 p-1 w-72 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">Price: ${price}</ul>
+              </ul>
+            </p>
+          </div>
+      
+        `)
+
+      } else {
+      
+      }
+  
     }
     
-    document.querySelector('.sign-out').addEventListener('click', async function(event) {
-      console.log('sign out clicked')
-      firebase.auth().signOut()
-      document.location.href = 'index.html'
-    })
-
   } else {
-// Signed out
+      // Signed out
       console.log(`signed out`)
   
       // Hide the form when signed-out

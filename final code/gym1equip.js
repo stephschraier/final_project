@@ -10,81 +10,105 @@
 
 
 //pull the images in from Firebase from equipment collection
-window.addEventListener('DOMContentLoaded', async function(event) {
-    let db = firebase.firestore()
+firebase.auth().onAuthStateChanged(async function(user) {
 
-   let querySnapshot = await db.collection('Equipment').get()
-   let equipmentAvailable = querySnapshot.docs
-   console.log (equipmentAvailable)
-   
-   for (let i=0; i < equipmentAvailable.length; i++){
-       let equipmentAvailableID = equipmentAvailable[i].id 
-       let equipment = equipmentAvailable[i].data()
-       let equipmentName = equipment.Equipment
-       let equipmentURL = equipment.ImageURL
-       let gymName = equipment.GymName
-       let price = equipment.Price
-       //this is the section to persist opacity, needs sign in code to work
-        let docRef = await db.collection('reservations').doc(`${equipmentAvailableID}`).get()
-        let reservedEquip = docRef.data()
-        let opacityClass = ''
-        if (reservedEquip) {
-        opacityClass = 'opacity-20'}
-        
-
-   //insert the html in the correct spot for the images
-   document.querySelector('.column1').insertAdjacentHTML ('beforeend',`
-        <div>
-            <div class="text-center text-sm mt-2">${equipmentName}</div>
-            <div><img class="m-auto border border-gray-300" src="${equipmentURL}"></div>
-            <div class="button-${equipmentAvailableID} text-center">
-                <form id="rented">
-                    <button class="rental bg-blue-800 hover:bg-blue-600 text-white px-4 py-2 rounded-xl">Reserve This</button>
-                </form>
-            </div>
-        </div>
-   `)
-  //when reserve me button is clicked send the ID back to firebase into the reservations collection - update to correct res collection
-//---
-    let equipmentRented = document.querySelector(`.button-${equipmentAvailableID}`)
-    equipmentRented.addEventListener('click', async function(event) {
-      event.preventDefault()
-      document.querySelector(`.button-${equipmentAvailableID}`).classList.add('opacity-20')
-      await db.collection('reservations3').add({
-        // Name: user.displayName,
-        // Email: user.email,
-        EquipmentID: equipmentAvailableID,
-        EquipmentName: equipmentName,
-        ImageURL: equipmentURL,
-        Price: price,
-        GymName: gymName
-        
-      })
+    if (user) {
+        // Signed in
+        let db = firebase.firestore()
+        console.log('signed in')
+    
+        // Ensure the signed-in user is in the users collection
+        db.collection('Users').doc(user.uid).set({
+            name: user.displayName,
+            email: user.email
+        })
       
- }
- )
- //---
-}
-   
- 
+        document.querySelector('.sign-in-or-sign-out').innerHTML = `
+        <div class = "text-center">
+        <h1 class="text-3xl font-bold text-blue-800 uppercase">Welcome to Equinox, ${user.displayName}</h1>
+        <button class="sign-out bg-blue-800 hover:bg-blue-600 text-white px-4 py-2">Sign Out</button>
+        </div>
+        `
 
+        document.querySelector('.sign-out').addEventListener('click', async function(event) {
+            console.log('sign out clicked')
+            firebase.auth().signOut()
+            document.location.href = 'index.html'
+        })
+
+        let querySnapshot = await db.collection('Equipment').get()
+        let equipmentAvailable = querySnapshot.docs
+        console.log (equipmentAvailable)
     
-   
-   //old from when we used a form not a button
-    // document.querySelector('form').addEventListener('submit', async function(event) {
-    // event.preventDefault()
-    
-    // let renterName = document.querySelector('#name').value
-    // let resStartDate = document.querySelector('#reservationstart').value
-    // let resEndDate = document.querySelector('#reservationend').value
+        for (let i=0; i < equipmentAvailable.length; i++){
 
-    // if (renterName.length && resStartDate.length && resEndDate.length > 0) {
-    //     let docRef = await db.collection('Reservations').add({
-    //       renterName: renterName,
-    //       resStartDate: resStartDate,
-    //       resEndDate: resEndDate
-    //     })
-    //   }
+            let equipmentAvailableID = equipmentAvailable[i].id 
+            let equipment = equipmentAvailable[i].data()
+            let equipmentName = equipment.Equipment
+            let equipmentURL = equipment.ImageURL
+            let gymName = equipment.GymName
+            let price = equipment.Price
 
-    // })
+            //this is the section to persist opacity, needs sign in code to work
+
+            let docRef = await db.collection('reservations').doc(`${equipmentAvailableID}`).get()
+            let reservedEquip = docRef.data()
+            let opacityClass = ''
+            if (reservedEquip) {
+            opacityClass = 'opacity-20'}
+            
+
+            //insert the html in the correct spot for the images
+            document.querySelector('.column1').insertAdjacentHTML ('beforeend',`
+                <div>
+                    <div class="text-center text-sm mt-2">${equipmentName}</div>
+                    <div><img class="m-auto border border-gray-300" src="${equipmentURL}"></div>
+                    <div class="button-${equipmentAvailableID} text-center">
+                        <form id="rented">
+                            <button class="rental bg-blue-800 hover:bg-blue-600 text-white px-4 py-2 rounded-xl">Reserve This</button>
+                        </form>
+                    </div>
+                </div>
+            `)
+            //when reserve me button is clicked send the ID back to firebase into the reservations collection - update to correct res collection
+
+            let equipmentRented = document.querySelector(`.button-${equipmentAvailableID}`)
+            equipmentRented.addEventListener('click', async function(event) {
+
+                event.preventDefault()
+
+                document.querySelector(`.button-${equipmentAvailableID}`).classList.add('opacity-20')
+                
+                await db.collection('reservations3').add({
+                    EquipmentID: equipmentAvailableID,
+                    EquipmentName: equipmentName,
+                    ImageURL: equipmentURL,
+                    Price: price,
+                    GymName: gymName,
+                    UserID: user.uid
+                    
+                })
+            
+            })
+
+        }
+
+    } else {
+        // Signed out
+        console.log(`signed out`)
+
+        // Initializes FirebaseUI Auth
+        let ui = new firebaseui.auth.AuthUI(firebase.auth())
+
+        // FirebaseUI configuration
+        let authUIConfig = {
+        signInOptions: [
+            firebase.auth.EmailAuthProvider.PROVIDER_ID
+        ],
+        signInSuccessUrl: 'index.html'
+        }
+        // Starts FirebaseUI Auth
+        ui.start('.sign-in-or-sign-out', authUIConfig)
+    }   
+
 })
