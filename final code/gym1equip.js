@@ -51,7 +51,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
 
             //this is the section to persist opacity, needs sign in code to work
 
-            let docRef = await db.collection('reservations').doc(`${equipmentAvailableID}`).get()
+            let docRef = await db.collection('reservations3').doc(`${equipmentAvailableID}`).get()
             let reservedEquip = docRef.data()
             let opacityClass = ''
             if (reservedEquip) {
