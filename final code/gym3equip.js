@@ -5,9 +5,6 @@
 // Back to home page button, log out button (can we redirect this back to the home page or do we need a 2nd button)
 // Database write back: Reservation ID and within that "UserID, Name, EquipmentID, Equipment Name, GymID, Gym Name, ImageURL"
 
-//TODO: Add in sign out button, add in link to reservations page, confirm grey out is persistent
-// Add data Scott needs - fix user name and email
-
 
 //pull the images in from Firebase from equipment collection
 firebase.auth().onAuthStateChanged(async function(user) {
@@ -59,7 +56,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
             
 
             //insert the html in the correct spot for the images
-            document.querySelector('.column1').insertAdjacentHTML ('beforeend',`
+            document.querySelector('.column3').insertAdjacentHTML ('beforeend',`
                 <div>
                     <div class="text-center text-sm mt-2">${equipmentName3}</div>
                     <div><img class="m-auto border border-gray-300" src="${equipmentURL3}"></div>
