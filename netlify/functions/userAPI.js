@@ -17,6 +17,7 @@ exports.handler = async function(event) {
 
     userData.push({
       id: userID,
+      username: userData.name,
       text: user.text
     })
   }
