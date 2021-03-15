@@ -36,18 +36,37 @@ firebase.auth().onAuthStateChanged(async function(user) {
             document.location.href = 'index.html'
         })
 
-        let querySnapshot = await db.collection('Equipment').get()
-        let equipmentAvailable = querySnapshot.docs
-        console.log (equipmentAvailable)
+        // let querySnapshot = await db.collection('Equipment').get()
+        // let equipmentAvailable = querySnapshot.docs
+        // console.log (equipmentAvailable)
         
-        for (let i=0; i < equipmentAvailable.length; i++){
-            let equipmentAvailableID = equipmentAvailable[i].id 
-            let equipment = equipmentAvailable[i].data()
-            let equipmentName = equipment.Equipment
-            let equipmentURL = equipment.ImageURL
-            let gymName = equipment.GymName
-            let gymID = equipment.GymID
-            let price = equipment.Price
+        // for (let i=0; i < equipmentAvailable.length; i++){
+        //     let equipmentAvailableID = equipmentAvailable[i].id 
+        //     let equipment = equipmentAvailable[i].data()
+        //     let equipmentName = equipment.Equipment
+        //     let equipmentURL = equipment.ImageURL
+        //     let gymName = equipment.GymName
+        //     let gymID = equipment.GymID
+        //     let price = equipment.Price
+
+          //let querySnapshot = await db.collection('Equipment').get()
+          let response = await fetch(`/.netlify/functions/equipmentAPI?GymID=lRQeq68w9mTWoYqR9stW`)
+          //UPDATE make dynamic gym
+          let equipmentAvailable = await response.json()
+         // let equipmentAvailable = querySnapshot.docs
+      
+          for (let i=0; i < equipmentAvailable.length; i++){
+  
+              let equipmentAvailableID = equipmentAvailable[i].id 
+              //let equipment = equipmentAvailable[i].data()- remove data
+              let equipment = equipmentAvailable[i]
+              console.log(equipment)
+              let equipmentName = equipment.equipmentname
+              let equipmentURL = equipment.imageUrl 
+              let gymName = equipment.gymname
+              let gymID = equipment.gymid
+              let price = equipment.price
+              //console.log(gymID)
 
             //this is the section to persist opacity, needs sign in code to work
 
