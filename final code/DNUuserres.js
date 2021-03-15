@@ -37,6 +37,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
     })
 
     let querySnapshot = await db.collection('reservations3').get() 
+    //Fetch reservationAPI
     let docRef = querySnapshot.docs 
     
     for (let i=0; i < docRef.length; i++){

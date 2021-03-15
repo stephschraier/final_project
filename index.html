@@ -1,31 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+    <head>
+        <title>HomeFit </title>
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" type="text/css">
+        <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.7.3/firebase-ui-auth.css" />
+    </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Final</title>
-  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" type="text/css">
-  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.7.3/firebase-ui-auth.css" />
-</head>
-
-<body>
-  <div class="sign-in-or-sign-out"></div>
- 
-  <!-- Put the Firebase config here -->
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
-  <!-- Firebase Auth -->
-  <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/ui/4.7.3/firebase-ui-auth.js"></script>
-
-  <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {} // replace
+    <body>
+        <div class = "bg-gray-200">
+        <h1 class="text-3xl font-bold text-blue-800 text-center uppercase">Welcome to HomeFit!</h1>
+        
+        <div class="sign-in-or-sign-out pt-4 px-16 text-black text-center">
+            <!-- JavaScript puts stuff here -->
+          </div>
+        
+          <div class="homepage p-16 md:flex md:flex-wrap">
+            <!-- JavaScript puts stuff here -->
+          </div>
+        
+          <!-- Put the Firebase config here -->
+          <!-- The core Firebase JS SDK is always required and must be listed first -->
+          <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+        
+          <!-- TODO: Add SDKs for Firebase products that you want to use
+              https://firebase.google.com/docs/web/setup#available-libraries -->
+          <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-firestore.js"></script>
+          <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-auth.js"></script>
+        
+          <!-- FirebaseUI Auth -->
+          <!-- https://firebaseopensource.com/projects/firebase/firebaseui-web/ -->
+          <script src="https://www.gstatic.com/firebasejs/ui/4.7.3/firebase-ui-auth.js"></script>
+        
+          <script>
+        // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyBV4ENyf8O8prGCmXSBWg7DUnvuHnQAnfU",
+        authDomain: "smc-final-project.firebaseapp.com",
+        projectId: "smc-final-project",
+        storageBucket: "smc-final-project.appspot.com",
+        messagingSenderId: "660955503732",
+        appId: "1:660955503732:web:7c0a578732def634df8521"
+    };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
-  </script>
-  <script src="index.js"></script>
-</body>
+    </script>
 
+    <script src="index.js"></script>
+
+    </body>
 </html>

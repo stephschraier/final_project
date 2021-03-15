@@ -19,6 +19,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
       name: user.displayName,
       email: user.email
     })
+// Fetch Gym API instead of hard coding
 
     document.querySelector('.homepage').insertAdjacentHTML('beforeend', `
             <div class="lg:flex m-auto">
