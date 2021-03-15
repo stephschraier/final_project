@@ -44,7 +44,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
 
         //let querySnapshot = await db.collection('Equipment').get()
         let response = await fetch(`/.netlify/functions/equipmentAPI?GymID=eqOdxleqeNWnFmXkICTk`)
-        //make dynamic gym
+        //UPDATE make dynamic gym
         let equipmentAvailable = await response.json()
        // let equipmentAvailable = querySnapshot.docs
     
@@ -55,10 +55,11 @@ firebase.auth().onAuthStateChanged(async function(user) {
             let equipment = equipmentAvailable[i]
             console.log(equipment)
             let equipmentName = equipment.equipmentname
-            // let equipmentURL = equipment.ImageURL UPDATE
+            let equipmentURL = equipment.imageUrl 
             let gymName = equipment.gymname
-           // let gymID = equipment.GymID UDPATE
+            let gymID = equipment.gymid
             let price = equipment.price
+<<<<<<< HEAD
             console.log(gymID)
 
             // where to insert this section - does it need its own loop
@@ -73,6 +74,9 @@ firebase.auth().onAuthStateChanged(async function(user) {
             //     opaque = ''
             // }
 
+=======
+            //console.log(gymID)
+>>>>>>> 8725fa243fee316e1744b99fbeac34588321bf95
                     
             //insert the html in the correct spot for the images
             if (gymID == 'eqOdxleqeNWnFmXkICTk'){

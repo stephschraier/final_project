@@ -27,9 +27,10 @@ exports.handler = async function(event) {
 // //     // add a new Object of our own creation to the reservationsData Array EDIT
     equipmentsData.push({
       id: equipmentId,                                          
-      imageUrl: equipmentData.ImageUrl,  // if lives in reservations
+      imageUrl: equipmentData.ImageURL,  // if lives in reservations
       equipmentname: equipmentData.Equipment, //if doesn't live in reservations pull from Query
       price: equipmentData.Price,
+      gymid: equipmentData.GymID,
       gymname: equipmentData.GymName                                                    
     })
   }

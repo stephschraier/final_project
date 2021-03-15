@@ -30,8 +30,11 @@ exports.handler = async function(event) {
     reservationsData.push({
       id: reservationId,                                          
       imageUrl: reservationData.ImageURL,
-      equipmentname: reservationData.EquipmentName // if lives in reservations
-              
+      equipmentname: reservationData.EquipmentName, // if lives in reservations
+      equipmentid: reservationData.EquipmentID,
+      gymname: reservationData.GymName,
+      price: reservationData.Price,        
+      userid: reservationData.UserID
     })
   }
 
