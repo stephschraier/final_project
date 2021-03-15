@@ -38,7 +38,6 @@ firebase.auth().onAuthStateChanged(async function(user) {
 
         let querySnapshot = await db.collection('Equipment').get()
         let equipmentAvailable = querySnapshot.docs
-        console.log (equipmentAvailable)
     
         for (let i=0; i < equipmentAvailable.length; i++){
 
@@ -50,13 +49,32 @@ firebase.auth().onAuthStateChanged(async function(user) {
             let price = equipment.Price
 
             //this is the section to persist opacity, needs sign in code to work
-
-            let docRef = await db.collection('reservations3').doc(`${equipmentAvailableID}`).get()
-            let reservedEquip = docRef.data()
-            let opacityClass = ''
-            if (reservedEquip) {
-            opacityClass = 'opacity-20'}
-            
+            let results = await db.collection('reservations3').get()
+            let resultsAvailable = querySnapshot.docs
+            console.log(resultsAvailable)
+                for (let i=0; i < resultsAvailable.length; i++) {
+                    let resEquip = resultsAvailable[i].data()
+                    let resEquipID = resEquip.ImageURL
+                    console.log(resEquipID)
+                
+                    let opaque
+                    if (resEquipID == equipmentURL) {
+                    opacityClass = 'opacity-20'
+                    } else {
+                        opaque = ''
+                    }
+                    
+                    // let opaque
+                    // let docRef = await db.collection('reservations3').doc(`Equipment.id`).get()
+                    // let reservedEquip = docRef.data()
+                    // console.log(docRef)
+                    // if (reservedEquip == equipment) {
+                    // opacityClass = 'opacity-20'
+                    // } else {
+                    //     opaque = ''
+                    // }
+                }
+                    
 
             //insert the html in the correct spot for the images
             document.querySelector('.column1').insertAdjacentHTML ('beforeend',`
@@ -70,13 +88,12 @@ firebase.auth().onAuthStateChanged(async function(user) {
                     </div>
                 </div>
             `)
+
             //when reserve me button is clicked send the ID back to firebase into the reservations collection - update to correct res collection
 
             let equipmentRented = document.querySelector(`.button-${equipmentAvailableID}`)
             equipmentRented.addEventListener('click', async function(event) {
-
                 event.preventDefault()
-
                 document.querySelector(`.button-${equipmentAvailableID}`).classList.add('opacity-20')
                 
                 await db.collection('reservations3').add({
