@@ -60,6 +60,19 @@ firebase.auth().onAuthStateChanged(async function(user) {
            // let gymID = equipment.GymID UDPATE
             let price = equipment.price
             console.log(gymID)
+
+            // where to insert this section - does it need its own loop
+            // need to pull in reservations collection
+            // let opaque
+            // let docRef = await db.collection('reservations3').doc(`Equipment.id`).get()
+            // let reservedEquip = docRef.data()
+            // console.log(docRef)
+            // if (reservedEquip == equipment) {
+            // opacityClass = 'opacity-20'
+            // } else {
+            //     opaque = ''
+            // }
+
                     
             //insert the html in the correct spot for the images
             if (gymID == 'eqOdxleqeNWnFmXkICTk'){
