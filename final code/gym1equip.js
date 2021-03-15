@@ -46,23 +46,25 @@ firebase.auth().onAuthStateChanged(async function(user) {
             let equipmentName = equipment.Equipment
             let equipmentURL = equipment.ImageURL
             let gymName = equipment.GymName
+            let gymID = equipment.GymID
             let price = equipment.Price
+            console.log(gymID)
 
             //this is the section to persist opacity, needs sign in code to work
-            let results = await db.collection('reservations3').get()
-            let resultsAvailable = querySnapshot.docs
-            console.log(resultsAvailable)
-                for (let i=0; i < resultsAvailable.length; i++) {
-                    let resEquip = resultsAvailable[i].data()
-                    let resEquipID = resEquip.ImageURL
-                    console.log(resEquipID)
+            // let results = await db.collection('reservations3').get()
+            // let resultsAvailable = querySnapshot.docs
+            // console.log(resultsAvailable)
+            //     for (let i=0; i < resultsAvailable.length; i++) {
+            //         let resEquip = resultsAvailable[i].data()
+            //         let resEquipID = resEquip.ImageURL
+            //         console.log(resEquipID)
                 
-                    let opaque
-                    if (resEquipID == equipmentURL) {
-                    opacityClass = 'opacity-20'
-                    } else {
-                        opaque = ''
-                    }
+            //         let opaque
+            //         if (resEquipID == equipmentURL) {
+            //         opacityClass = 'opacity-20'
+            //         } else {
+            //             opaque = ''
+            //         }
                     
                     // let opaque
                     // let docRef = await db.collection('reservations3').doc(`Equipment.id`).get()
@@ -73,10 +75,11 @@ firebase.auth().onAuthStateChanged(async function(user) {
                     // } else {
                     //     opaque = ''
                     // }
-                }
+                // }
                     
 
             //insert the html in the correct spot for the images
+
             document.querySelector('.column1').insertAdjacentHTML ('beforeend',`
                 <div>
                     <div class="text-center text-sm mt-2">${equipmentName}</div>
