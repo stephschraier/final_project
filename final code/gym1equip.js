@@ -10,6 +10,12 @@
 
 
 //pull the images in from Firebase from equipment collection
+
+
+// API let response = await fetch('/.netlify/functions/reservationsAPI?userID=${user.uid')
+// let XYZ = await response.json()
+
+
 firebase.auth().onAuthStateChanged(async function(user) {
 
     if (user) {
