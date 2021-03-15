@@ -59,7 +59,6 @@ firebase.auth().onAuthStateChanged(async function(user) {
             let gymName = equipment.gymname
             let gymID = equipment.gymid
             let price = equipment.price
-<<<<<<< HEAD
             console.log(gymID)
 
             // where to insert this section - does it need its own loop
@@ -74,9 +73,6 @@ firebase.auth().onAuthStateChanged(async function(user) {
             //     opaque = ''
             // }
 
-=======
-            //console.log(gymID)
->>>>>>> 8725fa243fee316e1744b99fbeac34588321bf95
                     
             //insert the html in the correct spot for the images
             if (gymID == 'eqOdxleqeNWnFmXkICTk'){
