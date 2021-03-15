@@ -49,37 +49,9 @@ firebase.auth().onAuthStateChanged(async function(user) {
             let gymID = equipment.GymID
             let price = equipment.Price
             console.log(gymID)
-
-            //this is the section to persist opacity, needs sign in code to work
-            // let results = await db.collection('reservations3').get()
-            // let resultsAvailable = querySnapshot.docs
-            // console.log(resultsAvailable)
-            //     for (let i=0; i < resultsAvailable.length; i++) {
-            //         let resEquip = resultsAvailable[i].data()
-            //         let resEquipID = resEquip.ImageURL
-            //         console.log(resEquipID)
-                
-            //         let opaque
-            //         if (resEquipID == equipmentURL) {
-            //         opacityClass = 'opacity-20'
-            //         } else {
-            //             opaque = ''
-            //         }
                     
-                    // let opaque
-                    // let docRef = await db.collection('reservations3').doc(`Equipment.id`).get()
-                    // let reservedEquip = docRef.data()
-                    // console.log(docRef)
-                    // if (reservedEquip == equipment) {
-                    // opacityClass = 'opacity-20'
-                    // } else {
-                    //     opaque = ''
-                    // }
-                // }
-                    
-
             //insert the html in the correct spot for the images
-
+            if (gymID == 'eqOdxleqeNWnFmXkICTk'){
             document.querySelector('.column1').insertAdjacentHTML ('beforeend',`
                 <div>
                     <div class="text-center text-sm mt-2">${equipmentName}</div>
@@ -91,6 +63,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
                     </div>
                 </div>
             `)
+            
 
             //when reserve me button is clicked send the ID back to firebase into the reservations collection - update to correct res collection
 
@@ -105,11 +78,13 @@ firebase.auth().onAuthStateChanged(async function(user) {
                     ImageURL: equipmentURL,
                     Price: price,
                     GymName: gymName,
+                    GymID: gymID,
                     UserID: user.uid
                     
                 })
             
             })
+        } else {}
 
         }
 

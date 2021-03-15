@@ -36,33 +36,35 @@ firebase.auth().onAuthStateChanged(async function(user) {
             document.location.href = 'index.html'
         })
 
-        let querySnapshot = await db.collection('Equipment2').get()
-        let equipmentAvailable2 = querySnapshot.docs
-        console.log (equipmentAvailable2)
+        let querySnapshot = await db.collection('Equipment').get()
+        let equipmentAvailable = querySnapshot.docs
+        console.log (equipmentAvailable)
         
-        for (let i=0; i < equipmentAvailable2.length; i++){
-            let equipmentAvailableID2 = equipmentAvailable2[i].id 
-            let equipment2 = equipmentAvailable2[i].data()
-            let equipmentName2 = equipment2.Equipment
-            let equipmentURL2 = equipment2.ImageURL
-            let gymName2 = equipment2.GymName
-            let price2 = equipment2.Price
+        for (let i=0; i < equipmentAvailable.length; i++){
+            let equipmentAvailableID = equipmentAvailable[i].id 
+            let equipment = equipmentAvailable[i].data()
+            let equipmentName = equipment.Equipment
+            let equipmentURL = equipment.ImageURL
+            let gymName = equipment.GymName
+            let gymID = equipment.GymID
+            let price = equipment.Price
 
             //this is the section to persist opacity, needs sign in code to work
 
-            let docRef = await db.collection('reservations3').doc(`${equipmentAvailableID2}`).get()
-            let reservedEquip = docRef.data()
-            let opacityClass = ''
-            if (reservedEquip) {
-            opacityClass = 'opacity-20'}
+            // let docRef = await db.collection('reservations3').doc(`${equipmentAvailableID2}`).get()
+            // let reservedEquip = docRef.data()
+            // let opacityClass = ''
+            // if (reservedEquip) {
+            // opacityClass = 'opacity-20'}
    
 
             //insert the html in the correct spot for the images
+            if (gymID == 'lRQeq68w9mTWoYqR9stW') {
             document.querySelector('.gym2').insertAdjacentHTML ('beforeend',`
                 <div>
-                    <div class="text-center text-sm mt-2">${equipmentName2}</div>
-                    <div><img class="m-auto border border-gray-300" src="${equipmentURL2}"></div>
-                    <div class="button-${equipmentAvailableID2} text-center">
+                    <div class="text-center text-sm mt-2">${equipmentName}</div>
+                    <div><img class="m-auto border border-gray-300" src="${equipmentURL}"></div>
+                    <div class="button-${equipmentAvailableID} text-center">
                         <form id="rented">
                             <button class="rental bg-blue-800 hover:bg-blue-600 text-white px-4 py-2 rounded-xl">Reserve This</button>
                         </form>
@@ -70,24 +72,29 @@ firebase.auth().onAuthStateChanged(async function(user) {
                 </div>
             `)
   //when reserve me button is clicked send the ID back to firebase into the reservations collection - update to correct res collection
-            let equipmentRented = document.querySelector(`.button-${equipmentAvailableID2}`)
+            let equipmentRented = document.querySelector(`.button-${equipmentAvailableID}`)
             equipmentRented.addEventListener('click', async function(event) {
             event.preventDefault()
-            document.querySelector(`.button-${equipmentAvailableID2}`).classList.add('opacity-20')
+            document.querySelector(`.button-${equipmentAvailableID}`).classList.add('opacity-20')
             await db.collection('reservations3').add({
                 // Name: user.displayName,
                 // Email: user.email,
-                EquipmentID: equipmentAvailableID2,
-                EquipmentName: equipmentName2,
-                ImageURL: equipmentURL2,
-                Price: price2,
-                GymName: gymName2
+                EquipmentID: equipmentAvailableID,
+                EquipmentName: equipmentName,
+                ImageURL: equipmentURL,
+                Price: price,
+                GymName: gymName,
+                GymID: gymID,
+                UserID: user.uid
             
             })
       
         })
+    } else {}
+
+}
  
-    }
+    
 
 } else {
     // Signed out
