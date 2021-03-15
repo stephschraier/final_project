@@ -36,19 +36,36 @@ firebase.auth().onAuthStateChanged(async function(user) {
         document.location.href = 'index.html'
       })
   
-      let querySnapshot = await db.collection('reservations3').get() 
-      //Fetch reservationAPI
-      let docRef = querySnapshot.docs 
+      // let querySnapshot = await db.collection('reservations3').get() 
+      // //Fetch reservationAPI
+      // let docRef = querySnapshot.docs 
       
-      for (let i=0; i < docRef.length; i++){
+      // for (let i=0; i < docRef.length; i++){
+          
+      //   let reservationId = docRef[i].id 
+      //   let reservationData = docRef[i].data()
+      //   let reservationURL = reservationData.ImageURL
+      //   let reservationEquipment = reservationData.EquipmentName
+      //   let gymName = reservationData.GymName
+      //   let price = reservationData.Price
+      //   let reservationUser = reservationData.UserID
+
+      let response = await fetch(`/.netlify/functions/reservationsAPI?userId=s2ceBRkfckNVV2PPqVBbeNEzPuz2`)
+      //UPDATE make reservation gym
+      let docRef = await response.json()
+     
+       for (let i=0; i < docRef.length; i++){
           
         let reservationId = docRef[i].id 
-        let reservationData = docRef[i].data()
-        let reservationURL = reservationData.ImageURL
-        let reservationEquipment = reservationData.EquipmentName
-        let gymName = reservationData.GymName
-        let price = reservationData.Price
-        let reservationUser = reservationData.UserID
+        let reservationData = docRef[i]
+          console.log(reservationData)
+        let reservationURL = reservationData.imageUrl
+        let reservationEquipment = reservationData.equipmentname
+        let gymName = reservationData.gymname
+        let price = reservationData.price
+        let reservationUser = reservationData.userid
+  
+      
   
         if (user.uid == reservationUser) {
   
