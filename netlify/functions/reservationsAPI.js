@@ -9,7 +9,7 @@ exports.handler = async function(event) {
 
   let db = firebase.firestore()
   let querySnapshot = await db.collection('reservations3')
-                              .where('userId', '==', queryStringUserId)
+                              .where('UserID', '==', queryStringUserId)
                               .get()
   console.log(`Number to reservations in collection: ${querySnapshot.size}`)
   
@@ -24,12 +24,14 @@ exports.handler = async function(event) {
                              .get()
 // might need to do equipmentQuery.data()
 // EX: equipmentname: equipmentQuery.data().Equipment
+//equipmentname: equipmentQuery.data().Equipment, //if doesn't live in reservations pull from Query                                           
 
 //     // add a new Object of our own creation to the reservationsData Array
     reservationsData.push({
       id: reservationId,                                          
-      imageUrl: reservationData.ImageUrl,  // if lives in reservations
-      equipmentname: equipmentQuery.Equipment, //if doesn't live in reservations pull from Query                                                   
+      imageUrl: reservationData.ImageURL,
+      equipmentname: reservationData.EquipmentName // if lives in reservations
+              
     })
   }
 

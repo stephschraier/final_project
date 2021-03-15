@@ -43,7 +43,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
         })
 
         //let querySnapshot = await db.collection('Equipment').get()
-        let response = await fetch(`/.netlify/functions/reservationsAPI?GymID=eqOdxleqeNWnFmXkICTk`)
+        let response = await fetch(`/.netlify/functions/equipmentAPI?GymID=eqOdxleqeNWnFmXkICTk`)
         //make dynamic gym
         let equipmentAvailable = await response.json()
        // let equipmentAvailable = querySnapshot.docs
@@ -53,11 +53,12 @@ firebase.auth().onAuthStateChanged(async function(user) {
             let equipmentAvailableID = equipmentAvailable[i].id 
             //let equipment = equipmentAvailable[i].data()- remove data
             let equipment = equipmentAvailable[i]
-            let equipmentName = equipment.Equipment
-            let equipmentURL = equipment.ImageURL
-            let gymName = equipment.GymName
-            let gymID = equipment.GymID
-            let price = equipment.Price
+            console.log(equipment)
+            let equipmentName = equipment.equipmentname
+            // let equipmentURL = equipment.ImageURL UPDATE
+            let gymName = equipment.gymname
+           // let gymID = equipment.GymID UDPATE
+            let price = equipment.price
             console.log(gymID)
                     
             //insert the html in the correct spot for the images

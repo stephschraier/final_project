@@ -1,0 +1,59 @@
+<!-- Notes -->
+<!-- How to make title dynamic with gym name -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Equinox Gym</title>
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body>
+        
+        <div class = "bg-gray-200">
+            <h1 class = "sign-in-or-sign-out"></h1>
+            <p class="text-right font-bold underline text-blue-800">
+                <a href="userres.html">MY RESERVATIONS</a>
+            </p>
+            <div class="m-auto">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 column1">
+                    <!-- <div class="column1 text-center text-xl font-bold text-gray-700 uppercase">Cardio Equipment</div> -->
+                </div>
+
+                <p class="text-center text-xs underline">
+                    <a href="index.html">Back to Home</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Put the Firebase config here -->
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+    
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-auth.js"></script>
+    
+        <!-- FirebaseUI Auth -->
+        <!-- https://firebaseopensource.com/projects/firebase/firebaseui-web/ -->
+        <script src="https://www.gstatic.com/firebasejs/ui/4.7.3/firebase-ui-auth.js"></script>
+    
+        <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBV4ENyf8O8prGCmXSBWg7DUnvuHnQAnfU",
+            authDomain: "smc-final-project.firebaseapp.com",
+            projectId: "smc-final-project",
+            storageBucket: "smc-final-project.appspot.com",
+            messagingSenderId: "660955503732",
+            appId: "1:660955503732:web:7c0a578732def634df8521"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        </script>
+
+        <script src="gym1equip.js"></script>
+
+    </body>
+</html>
