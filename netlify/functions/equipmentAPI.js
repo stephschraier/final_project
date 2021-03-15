@@ -5,7 +5,7 @@ exports.handler = async function(event) {
   console.log(event)
   let queryStringUserId = event.queryStringParameters.userId
 
-  let gymssData = []
+  let equipmentsData = []
 
   let db = firebase.firestore()
   let querySnapshot = await db.collection('Equipment')
@@ -19,19 +19,18 @@ exports.handler = async function(event) {
 // // loop through the post documents
   for (let i=0; i<equipments.length; i++) {
     let equipmentId = equipments[i].id                                // the ID for the given post
-    let equipmentData = equpimentss[i].data()                          // the rest of the post data
+    let equipmentData = equpiments[i].data().get()                       // the rest of the post data
     // let equipmentQuery = await db.collection('equipment').doc(reservationsData.EquipmentID)         // likes from Firestore
-                             .get()
 // might need to do equipmentQuery.data()
 // EX: equipmentname: equipmentQuery.data().Equipment
 
 // //     // add a new Object of our own creation to the reservationsData Array EDIT
-//     gymsData.push({
-//       id: reservationId,                                          
-//       imageUrl: reservationData.ImageUrl,  // if lives in reservations
-//       equipmentname: equipmentQuery.Equipment, //if doesn't live in reservations pull from Query                                                   
-//     })
-//   }
+    equipmentsData.push({
+      id: equipmentId,                                          
+      imageUrl: equipmentData.ImageUrl,  // if lives in reservations
+      equipmentname: equipmentData.Equipment, //if doesn't live in reservations pull from Query                                                   
+    })
+  }
 
   return {
     statusCode: 200,
