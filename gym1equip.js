@@ -64,8 +64,8 @@ firebase.auth().onAuthStateChanged(async function(user) {
             // where to insert this section - does it need its own loop
             // need to pull in reservations collection
             // let opaque
-            // let docRef = await db.collection('reservations3').doc(`Equipment.id`).get()
-            // let reservedEquip = docRef.data()
+            // let docRef = await fetch(`/.netlify/functions/createReservationAPI`)
+            // // let reservedEquip = docRef.data()
             // console.log(docRef)
             // if (reservedEquip == equipment) {
             // opacityClass = 'opacity-20'
@@ -73,6 +73,14 @@ firebase.auth().onAuthStateChanged(async function(user) {
             //     opaque = ''
             // }
 
+            // for (let i=0; i<movies.length; i++) {
+            //     let movie = movies[i]
+            //     let docRef = await db.collection('watched').doc(`${movie.id}-${user.uid}`).get()
+            //     let watchedMovie = docRef.data()
+            //     let opacityClass = ''
+            //     if (watchedMovie) {
+            //       opacityClass = 'opacity-20'
+            //     }
                     
             //insert the html in the correct spot for the images
             if (gymID == 'eqOdxleqeNWnFmXkICTk'){
@@ -97,17 +105,32 @@ firebase.auth().onAuthStateChanged(async function(user) {
                 document.querySelector(`.button-${equipmentAvailableID}`).classList.add('opacity-20')
                 
 
-             //create reservation    
-                await db.collection('reservations3').add({
-                    EquipmentID: equipmentAvailableID,
-                    EquipmentName: equipmentName,
-                    ImageURL: equipmentURL,
-                    Price: price,
-                    GymName: gymName,
-                    GymID: gymID,
-                    UserID: user.uid
-                    
+
+                let response = await fetch('/.netlify/functions/createReservationAPI', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        EquipmentID: equipmentAvailableID,
+                        EquipmentName: equipmentName,
+                        ImageURL: equipmentURL,
+                        Price: price,
+                        GymName: gymName,
+                        GymID: gymID,
+                        UserID: user.uid,
+                    })
                 })
+                console.log(response)
+              
+                //  create reservation    
+                // await db.collection('reservations3').doc(`${equipmentAvailableID}-${user.uid}`).set({
+                //     EquipmentID: equipmentAvailableID,
+                //     EquipmentName: equipmentName,
+                //     ImageURL: equipmentURL,
+                //     Price: price,
+                //     GymName: gymName,
+                //     GymID: gymID,
+                //     UserID: user.uid
+                    
+                // })
             
             })
         } else {}
