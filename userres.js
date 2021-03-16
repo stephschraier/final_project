@@ -35,20 +35,6 @@ firebase.auth().onAuthStateChanged(async function(user) {
         firebase.auth().signOut()
         document.location.href = 'index.html'
       })
-  
-      // let querySnapshot = await db.collection('reservations3').get() 
-      // //Fetch reservationAPI
-      // let docRef = querySnapshot.docs 
-      
-      // for (let i=0; i < docRef.length; i++){
-          
-      //   let reservationId = docRef[i].id 
-      //   let reservationData = docRef[i].data()
-      //   let reservationURL = reservationData.ImageURL
-      //   let reservationEquipment = reservationData.EquipmentName
-      //   let gymName = reservationData.GymName
-      //   let price = reservationData.Price
-      //   let reservationUser = reservationData.UserID
 
       let response = await fetch(`/.netlify/functions/reservationsAPI?userId=${user.uid}`)
       //UPDATE make reservation gym
@@ -64,9 +50,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
         let gymName = reservationData.gymname
         let price = reservationData.price
         let reservationUser = reservationData.userid
-  
-      
-  
+        
         if (user.uid == reservationUser) {
   
           document.querySelector('.column1').insertAdjacentHTML ('beforeend',`

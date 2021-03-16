@@ -97,15 +97,28 @@ firebase.auth().onAuthStateChanged(async function(user) {
 
                 document.querySelector(`.button-${equipmentAvailableID}`).classList.add('opacity-20')
                 
-                await db.collection('reservations3').add({
-                    EquipmentID: equipmentAvailableID,
-                    EquipmentName: equipmentName,
-                    ImageURL: equipmentURL,
-                    Price: price,
-                    GymName: gymName,
-                    GymID: gymID,
-                    UserID: user.uid
+                // await db.collection('reservations3').add({
+                //     EquipmentID: equipmentAvailableID,
+                //     EquipmentName: equipmentName,
+                //     ImageURL: equipmentURL,
+                //     Price: price,
+                //     GymName: gymName,
+                //     GymID: gymID,
+                //     UserID: user.uid
                     
+                // })
+
+                let response = await fetch('/.netlify/functions/createReservationAPI', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        EquipmentID: equipmentAvailableID,
+                        EquipmentName: equipmentName,
+                        ImageURL: equipmentURL,
+                        Price: price,
+                        GymName: gymName,
+                        GymID: gymID,
+                        UserID: user.uid,
+                    })
                 })
             
             })

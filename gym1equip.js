@@ -118,21 +118,9 @@ firebase.auth().onAuthStateChanged(async function(user) {
                         UserID: user.uid,
                     })
                 })
-                console.log(response)
-              
-                //  create reservation    
-                // await db.collection('reservations3').doc(`${equipmentAvailableID}-${user.uid}`).set({
-                //     EquipmentID: equipmentAvailableID,
-                //     EquipmentName: equipmentName,
-                //     ImageURL: equipmentURL,
-                //     Price: price,
-                //     GymName: gymName,
-                //     GymID: gymID,
-                //     UserID: user.uid
-                    
-                // })
             
             })
+            
         } else {}
 
         }
