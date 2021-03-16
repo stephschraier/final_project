@@ -50,7 +50,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
       //   let price = reservationData.Price
       //   let reservationUser = reservationData.UserID
 
-      let response = await fetch(`/.netlify/functions/reservationsAPI?userId=s2ceBRkfckNVV2PPqVBbeNEzPuz2`)
+      let response = await fetch(`/.netlify/functions/reservationsAPI?userId=${user.uid}`)
       //UPDATE make reservation gym
       let docRef = await response.json()
      
