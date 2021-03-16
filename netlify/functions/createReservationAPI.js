@@ -16,12 +16,11 @@ exports.handler = async function(event) {
   let querySnapshot = await db.collection('reservations3')
                               .where('EquipmentID', '==', equipmentID)
                               .where('UserID', '==', userId)
-                              .where('GymID', '==', GymID)
                               .get()
   let existingReservation = querySnapshot.size
 
   if (existingReservation == 0) {
-    await db.collection('reservations3').doc(`${GymID}-${equipmentID}-${userId}`).set({
+    await db.collection('reservations3').doc(`${equipmentID}-${userId}`).set({
       EquipmentID: equipmentID,
       EquipmentName: EquipmentName,
       ImageURL: ImageURL,

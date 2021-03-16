@@ -30,6 +30,7 @@ exports.handler = async function(event) {
     gymsData.push({
       id: gymId,   
       gymname: gymData.Name, 
+      gymsafename: gymData.gymSafeName,
       gymimage: gymData.gymImage                                      
       //imageUrl: reservationData.ImageUrl,  // if lives in reservations
       //gymname: gymData.name, //if doesn't live in reservations pull from Query                                                   

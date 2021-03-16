@@ -25,7 +25,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
 
         document.querySelector('.sign-in-or-sign-out').innerHTML = `
         <div class = "text-center">
-        <h1 class="text-3xl font-bold text-blue-800 uppercase">Welcome to Equinox, ${user.displayName}</h1>
+        <h1 class="text-3xl font-bold text-blue-800 uppercase">Welcome to East Bank Club, ${user.displayName}</h1>
         <button class="sign-out bg-blue-800 hover:bg-blue-600 text-white px-4 py-2">Sign Out</button>
         </div>
         `
@@ -36,29 +36,13 @@ firebase.auth().onAuthStateChanged(async function(user) {
             document.location.href = 'index.html'
         })
 
-        // let querySnapshot = await db.collection('Equipment').get()
-        // let equipmentAvailable = querySnapshot.docs
-        // console.log (equipmentAvailable)
-        
-        // for (let i=0; i < equipmentAvailable.length; i++){
-        //     let equipmentAvailableID = equipmentAvailable[i].id 
-        //     let equipment = equipmentAvailable[i].data()
-        //     let equipmentName = equipment.Equipment
-        //     let equipmentURL = equipment.ImageURL
-        //     let gymName = equipment.GymName
-        //     let gymID = equipment.GymID
-        //     let price = equipment.Price
-
-          //let querySnapshot = await db.collection('Equipment').get()
           let response = await fetch(`/.netlify/functions/equipmentAPI?GymID=lRQeq68w9mTWoYqR9stW`)
-          //UPDATE make dynamic gym
+
           let equipmentAvailable = await response.json()
-         // let equipmentAvailable = querySnapshot.docs
       
           for (let i=0; i < equipmentAvailable.length; i++){
   
               let equipmentAvailableID = equipmentAvailable[i].id 
-              //let equipment = equipmentAvailable[i].data()- remove data
               let equipment = equipmentAvailable[i]
               console.log(equipment)
               let equipmentName = equipment.equipmentname
@@ -66,7 +50,6 @@ firebase.auth().onAuthStateChanged(async function(user) {
               let gymName = equipment.gymname
               let gymID = equipment.gymid
               let price = equipment.price
-              //console.log(gymID)
 
             //this is the section to persist opacity, needs sign in code to work
 
@@ -95,18 +78,6 @@ firebase.auth().onAuthStateChanged(async function(user) {
             equipmentRented.addEventListener('click', async function(event) {
             event.preventDefault()
             document.querySelector(`.button-${equipmentAvailableID}`).classList.add('opacity-20')
-            // await db.collection('reservations3').add({
-            //     // Name: user.displayName,
-            //     // Email: user.email,
-            //     EquipmentID: equipmentAvailableID,
-            //     EquipmentName: equipmentName,
-            //     ImageURL: equipmentURL,
-            //     Price: price,
-            //     GymName: gymName,
-            //     GymID: gymID,
-            //     UserID: user.uid
-            
-            // })
 
             let response = await fetch('/.netlify/functions/createReservationAPI', {
                 method: 'POST',
@@ -119,9 +90,11 @@ firebase.auth().onAuthStateChanged(async function(user) {
                     GymID: gymID,
                     UserID: user.uid,
                 })
+                
             })
       
         })
+
     } else {}
 
 }

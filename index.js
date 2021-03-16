@@ -30,10 +30,10 @@ firebase.auth().onAuthStateChanged(async function(user) {
         let gymavailableID = gymsavailable[i].id 
         //let equipment = equipmentAvailable[i].data()- remove data
         let gym1 = gymsavailable[i]
-        console.log(gym1)
         let gymName = gym1.gymname
         let gymimage = gym1.gymimage
-    
+        let gymSafeName = gym1.gymsafename
+        console.log(gym1)
 
     document.querySelector('.homepage').insertAdjacentHTML('beforeend', `
             <div class="lg:flex m-auto">
@@ -44,7 +44,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
                 </p>
                 <p><img class="m-auto border border-gray-300" src="${gymimage}"></p>
                     <div class="text-center mt-6">
-                        <a href="gym1equip.html" class="bg-blue-800 hover:bg-blue-600 text-white px-2 py-1 rounded-xl">See Available Equipment</a>
+                        <a href="${gymSafeName}equip.html" class="bg-blue-800 hover:bg-blue-600 text-white px-2 py-1 rounded-xl">See Available Equipment</a>
                     </div>
             </div>  
             </div>
