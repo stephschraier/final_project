@@ -64,7 +64,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
             // where to insert this section - does it need its own loop
             // need to pull in reservations collection
             let opaque
-            let resPull = await fetch(`/.netlify/functions/reservationsAPI`)
+            let resPull = await fetch(`/.netlify/functions/reservationsAPI?userId=${user.uid}`)
             let reservedEquip = await resPull.json()
             console.log(resPull)
             if (reservedEquip == equipment) {
