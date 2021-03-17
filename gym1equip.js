@@ -63,15 +63,15 @@ firebase.auth().onAuthStateChanged(async function(user) {
 
             // where to insert this section - does it need its own loop
             // need to pull in reservations collection
-            // let opaque
-            // let docRef = await fetch(`/.netlify/functions/createReservationAPI`)
-            // // let reservedEquip = docRef.data()
-            // console.log(docRef)
-            // if (reservedEquip == equipment) {
-            // opacityClass = 'opacity-20'
-            // } else {
-            //     opaque = ''
-            // }
+            let opaque
+            let resPull = await fetch(`/.netlify/functions/reservationsAPI`)
+            let reservedEquip = await resPull.json()
+            console.log(resPull)
+            if (reservedEquip == equipment) {
+            opacityClass = 'opacity-20'
+            } else {
+                opaque = ''
+            }
 
             // for (let i=0; i<movies.length; i++) {
             //     let movie = movies[i]
