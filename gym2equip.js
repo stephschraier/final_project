@@ -1,15 +1,6 @@
-// Gym specific name, equipment available (picture and description for each item), 4 per category
-// Under each item - input field for name, res start, res end date and reserve me button
-// When reserve me button is clicked - item becomes greyed out
-// Go to my profile link to get to user profile page
-// Back to home page button, log out button (can we redirect this back to the home page or do we need a 2nd button)
-// Database write back: Reservation ID and within that "UserID, Name, EquipmentID, Equipment Name, GymID, Gym Name, ImageURL"
-
-//TODO: Add in sign out button, add in link to reservations page, confirm grey out is persistent, create shell for 2 and 3 w/ 1 piece
-// Add data Scott needs - fix user name and email
 
 
-//pull the images in from Firebase from equipment collection
+
 firebase.auth().onAuthStateChanged(async function(user) {
 
     if (user) {
@@ -51,13 +42,17 @@ firebase.auth().onAuthStateChanged(async function(user) {
               let gymID = equipment.gymid
               let price = equipment.price
 
-            //this is the section to persist opacity, needs sign in code to work
-
-            // let docRef = await db.collection('reservations3').doc(`${equipmentAvailableID2}`).get()
-            // let reservedEquip = docRef.data()
-            // let opacityClass = ''
-            // if (reservedEquip) {
-            // opacityClass = 'opacity-20'}
+              let opaque = ''
+              let resPull = await fetch(`/.netlify/functions/reservationsAPI?userId=${user.uid}`)
+              let reservedEquip = await resPull.json()
+              
+              for (let e = 0; e < reservedEquip.length; e++) {
+                  console.log(reservedEquip[e])
+                  if (reservedEquip[e].equipmentid == equipmentAvailableID) {
+                      console.log('hello from the other side')
+                  opaque = 'opacity-20'
+                  } 
+              }
    
 
             //insert the html in the correct spot for the images
@@ -68,7 +63,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
                     <div><img class="m-auto border border-gray-300" src="${equipmentURL}"></div>
                     <div class="button-${equipmentAvailableID} text-center">
                         <form id="rented">
-                            <button class="rental bg-blue-800 hover:bg-blue-600 text-white px-4 py-2 rounded-xl">Reserve This</button>
+                            <button class="${opaque} rental bg-blue-800 hover:bg-blue-600 text-white px-4 py-2 rounded-xl">Reserve This</button>
                         </form>
                     </div>
                 </div>
@@ -89,7 +84,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
                     GymName: gymName,
                     GymID: gymID,
                     UserID: user.uid,
-                })
+                }) 
                 
             })
       

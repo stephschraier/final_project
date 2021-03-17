@@ -33,20 +33,6 @@ firebase.auth().onAuthStateChanged(async function(user) {
             document.location.href = 'index.html'
         })
 
-        // let querySnapshot = await db.collection('Equipment').get()
-        // let equipmentAvailable = querySnapshot.docs
-        // console.log (equipmentAvailable)
-    
-        // for (let i=0; i < equipmentAvailable.length; i++){
-
-        //     let equipmentAvailableID = equipmentAvailable[i].id 
-        //     let equipment = equipmentAvailable[i].data()
-        //     let equipmentName = equipment.Equipment
-        //     let equipmentURL = equipment.ImageURL
-        //     let gymName = equipment.GymName
-        //     let gymID = equipment.GymID
-        //     let price = equipment.Price
-
         //let querySnapshot = await db.collection('Equipment').get()
         let response = await fetch(`/.netlify/functions/equipmentAPI?GymID=zx6CZMCldQJFBj0VyXo8`)
         //UPDATE make dynamic gym
@@ -64,16 +50,19 @@ firebase.auth().onAuthStateChanged(async function(user) {
             let gymName = equipment.gymname
             let gymID = equipment.gymid
             let price = equipment.price
-            //console.log(gymID)
 
-            //this is the section to persist opacity, needs sign in code to work
-
-            // let docRef = await db.collection('reservations3').doc(`${equipmentAvailableID}`).get()
-            // let reservedEquip = docRef.data()
-            // let opacityClass = ''
-            // if (reservedEquip) {
-            // opacityClass = 'opacity-20'}
+            let opaque = ''
+            let resPull = await fetch(`/.netlify/functions/reservationsAPI?userId=${user.uid}`)
+            let reservedEquip = await resPull.json()
             
+            for (let e = 0; e < reservedEquip.length; e++) {
+                console.log(reservedEquip[e])
+                if (reservedEquip[e].equipmentid == equipmentAvailableID) {
+                    console.log('hello from the other side')
+                opaque = 'opacity-20'
+                } 
+            }
+             
 
             //insert the html in the correct spot for the images
             if (gymID == 'zx6CZMCldQJFBj0VyXo8'){
@@ -83,7 +72,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
                     <div><img class="m-auto border border-gray-300" src="${equipmentURL}"></div>
                     <div class="button-${equipmentAvailableID} text-center">
                         <form id="rented">
-                            <button class="rental bg-blue-800 hover:bg-blue-600 text-white px-4 py-2 rounded-xl">Reserve This</button>
+                            <button class="${opaque} rental bg-blue-800 hover:bg-blue-600 text-white px-4 py-2 rounded-xl">Reserve This</button>
                         </form>
                     </div>
                 </div>

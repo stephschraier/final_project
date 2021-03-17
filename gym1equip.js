@@ -1,19 +1,4 @@
-// Gym specific name, equipment available (picture and description for each item), 4 per category
-// Under each item - input field for name, res start, res end date and reserve me button
-// When reserve me button is clicked - item becomes greyed out
-// Go to my profile link to get to user profile page
-// Back to home page button, log out button (can we redirect this back to the home page or do we need a 2nd button)
-// Database write back: Reservation ID and within that "UserID, Name, EquipmentID, Equipment Name, GymID, Gym Name, ImageURL"
 
-//TODO: Add in sign out button, add in link to reservations page, confirm grey out is persistent
-// Add data Scott needs - fix user name and email
-
-
-//pull the images in from Firebase from equipment collection
-
-
-// API let response = await fetch('/.netlify/functions/reservationsAPI?userID=${user.uid') CHANGE TO GYM ID
-// let XYZ = await response.json()
 
 
 firebase.auth().onAuthStateChanged(async function(user) {
@@ -42,45 +27,33 @@ firebase.auth().onAuthStateChanged(async function(user) {
             document.location.href = 'index.html'
         })
 
-        //let querySnapshot = await db.collection('Equipment').get()
         let response = await fetch(`/.netlify/functions/equipmentAPI?GymID=eqOdxleqeNWnFmXkICTk`)
-        //UPDATE make dynamic gym
+        
         let equipmentAvailable = await response.json()
-       // let equipmentAvailable = querySnapshot.docs
     
         for (let i=0; i < equipmentAvailable.length; i++){
 
             let equipmentAvailableID = equipmentAvailable[i].id 
-            //let equipment = equipmentAvailable[i].data()- remove data
             let equipment = equipmentAvailable[i]
-            console.log(equipment)
+            console.log(equipmentAvailableID)
             let equipmentName = equipment.equipmentname
             let equipmentURL = equipment.imageUrl 
             let gymName = equipment.gymname
             let gymID = equipment.gymid
             let price = equipment.price
-            console.log(gymID)
+            // console.log(gymID)
 
-            // where to insert this section - does it need its own loop
-            // need to pull in reservations collection
-            let opaque
+            let opaque = ''
             let resPull = await fetch(`/.netlify/functions/reservationsAPI?userId=${user.uid}`)
             let reservedEquip = await resPull.json()
-            console.log(resPull)
-            if (reservedEquip == equipment) {
-            opacityClass = 'opacity-20'
-            } else {
-                opaque = ''
+            
+            for (let e = 0; e < reservedEquip.length; e++) {
+                console.log(reservedEquip[e])
+                if (reservedEquip[e].equipmentid == equipmentAvailableID) {
+                    console.log('hello from the other side')
+                opaque = 'opacity-20'
+                } 
             }
-
-            // for (let i=0; i<movies.length; i++) {
-            //     let movie = movies[i]
-            //     let docRef = await db.collection('watched').doc(`${movie.id}-${user.uid}`).get()
-            //     let watchedMovie = docRef.data()
-            //     let opacityClass = ''
-            //     if (watchedMovie) {
-            //       opacityClass = 'opacity-20'
-            //     }
                     
             //insert the html in the correct spot for the images
             if (gymID == 'eqOdxleqeNWnFmXkICTk'){
@@ -90,15 +63,12 @@ firebase.auth().onAuthStateChanged(async function(user) {
                     <div><img class="m-auto border border-gray-300" src="${equipmentURL}"></div>
                     <div class="button-${equipmentAvailableID} text-center">
                         <form id="rented">
-                            <button class="rental bg-blue-800 hover:bg-blue-600 text-white px-4 py-2 rounded-xl">Reserve This</button>
+                            <button class="${opaque} rental bg-blue-800 hover:bg-blue-600 text-white px-4 py-2 rounded-xl">Reserve This</button>
                         </form>
                     </div>
                 </div>
-            `)
-            
-
+            `) 
             //when reserve me button is clicked send the ID back to firebase into the reservations collection - update to correct res collection
-
             let equipmentRented = document.querySelector(`.button-${equipmentAvailableID}`)
             equipmentRented.addEventListener('click', async function(event) {
                 event.preventDefault()
